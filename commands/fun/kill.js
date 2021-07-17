@@ -2,6 +2,7 @@ module.exports = {
 	name: 'kill',
 	description: 'Moves a random person from any voice channel to the dead channel',
 	execute(message, args) {
+        
         const server = message.guild; // Gets guild from the Message object
         if(!server.available) {
             message.reply("Nice try");
@@ -36,7 +37,7 @@ module.exports = {
 
         for (const [channelID, channel] of channels) {
             if (channelID === deadChannelID) continue;
-            
+
             for (const [memberID, member] of channel.members) {
                 if (randomMemberID === memberID) {
                     member.setVoiceChannel(deadChannelID)

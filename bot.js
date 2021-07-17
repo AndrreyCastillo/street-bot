@@ -44,7 +44,7 @@ bot.on("message", message => {
 
 	// When the bot is @'ed
 	if (message.mentions.has(bot.user.id)) {
-		message.reply({files:['./media.street_hey.png']});
+		message.reply('', {files:['./media.street_hey.png']});
 	}
 
 	// ----------- HANDLES COMMANDS WITH PREFIX AFTER THIS POINT -------------
