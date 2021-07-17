@@ -12,6 +12,6 @@ module.exports = {
         }
         const randomPicture = garyPictures[Math.floor(Math.random()*garyPictures.length)];
 
-        message.reply('', {files: ["./media/"+randomPicture]});
+        message.reply({files: ["./media/"+randomPicture]});
 	}
 };

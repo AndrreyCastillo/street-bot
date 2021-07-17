@@ -5,6 +5,6 @@ module.exports = {
 	description: 'Picture of StreetRat',
 	execute(message, args) {
 
-        message.channel.send('', {files:['./media/street_huh.jpg']});
+        message.channel.send({files:['./media/street_huh.jpg']});
 	}
 };
