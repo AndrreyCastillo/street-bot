@@ -1,0 +1,35 @@
+{
+  "name": "street-bot",
+  "version": "1.0.0",
+  "description": "a discord bot for the Street Cord",
+  "main": "bot.js",
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "dotenv": "^10.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node test.js",
+    "start": "node bot.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndrreyCastillo/street-bot.git"
+  },
+  "keywords": [
+    "discord",
+    "discord",
+    "bot",
+    "bot",
+    "discordjs",
+    "js",
+    "Street",
+    "Cord"
+  ],
+  "author": "Roosta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndrreyCastillo/street-bot/issues"
+  },
+  "homepage": "https://github.com/AndrreyCastillo/street-bot#readme"
+}
