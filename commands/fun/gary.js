@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const fs = require('fs');
 
 module.exports = {
@@ -5,13 +6,13 @@ module.exports = {
 	description: 'Random gary pictures',
 	execute(message, args) {
 
-        const garyFolder = fs.readdirSync('./media/gary');
-        let garyPictures = []
-        for (const garyPicture of garyFolder) {
-            garyPictures.push(garyPicture)
-        }
-        const randomPicture = garyPictures[Math.floor(Math.random()*garyPictures.length)];
+		const garyFolder = fs.readdirSync('./media/gary');
+		const garyPictures = [];
+		for (const garyPicture of garyFolder) {
+			garyPictures.push(garyPicture);
+		}
+		const randomPicture = garyPictures[Math.floor(Math.random() * garyPictures.length)];
 
-        message.reply({files: ["./media/"+randomPicture]});
-	}
+		message.reply({ files: ['./media/' + randomPicture] });
+	},
 };
