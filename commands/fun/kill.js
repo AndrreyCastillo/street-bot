@@ -2,7 +2,10 @@
 module.exports = {
 	name: 'kill',
 	description: 'Moves a random person from any voice channel to the dead channel',
+	guildOnly: true,
 	execute(message, args) {
+		// if command is executed in a dm
+		if (this.guildOnly && message.channel.type === 'dm') return message.reply('Nice try');
 
 		// Gets guild from the Message object
 		const server = message.guild;
@@ -21,7 +24,7 @@ module.exports = {
 			return;
 		}
 
-		const deadChannelID = server.channels.afkChannelID;
+		const deadChannelID = server.afkChannelID;
 
 		if (deadChannelID === '' || deadChannelID.length === 0) {
 			message.reply('There\'s no afk channel!!!');
@@ -29,11 +32,12 @@ module.exports = {
 		}
 
 		const voiceMemberIDs = [];
-		const channels = server.channels.filter(channel => channel.type === 'voice');
+		const channels = server.channels.cache.filter(channel => channel.type === 'voice');
+
 		for (const [channelID, channel] of channels) {
 			if (channelID === deadChannelID) continue;
 
-			for (const [memberID, _member] of channel.members) {
+			for (const [memberID, member] of channel.members) {
 				voiceMemberIDs.push(memberID);
 			}
 		}
@@ -45,7 +49,7 @@ module.exports = {
 
 			for (const [memberID, member] of channel.members) {
 				if (randomMemberID === memberID) {
-					member.setVoiceChannel(deadChannelID)
+					member.voice.setChannel(deadChannelID)
 						.then(message.channel.send(`See ya, ${member}`))
 						.catch(console.error);
 

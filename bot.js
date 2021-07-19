@@ -8,9 +8,6 @@ const Discord = require('discord.js');
 // Node's native file system module (https://nodejs.org/api/fs.html)
 const fs = require('fs');
 
-// for configurations variables that are public
-const { prefix } = require('./config.json');
-
 // environment variables, unseen to the naked eye
 // eslint-disable-next-line no-unused-vars
 const env = require('dotenv').config();
@@ -21,6 +18,7 @@ const bot = new Discord.Client();
 // Kind of like a Map but for discord (https://discordjs.guide/additional-info/collections.html)
 bot.commands = new Discord.Collection();
 
+// initialize bot.commands
 const commandFolders = fs.readdirSync('./commands');
 for (const folder of commandFolders) {
 
@@ -37,45 +35,17 @@ for (const folder of commandFolders) {
 	}
 }
 
-/**
- * The ready event is vital, it means that only _after_ this will your bot start reacting to information
- * received from Discord
- */
-bot.once('ready', () => {
-	console.log('StreetBot is ready!');
-});
-
-// Create an event listener for messages
-bot.on('message', message => {
-
-	if (message.author.bot) return;
-	if (message.content.includes('@here') || message.content.includes('@everyone')) return false;
-
-	// When the bot is @'ed
-	if (message.mentions.has(bot.user.id)) {
-		message.reply('', { files:['./media.street_hey.png'] });
+// send events to proper file
+const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+for (const file of eventFiles) {
+	const event = require(`./events/${file}`);
+	if (event.once) {
+		bot.once(event.name, (...args) => event.execute(...args, bot));
 	}
-
-	// ----------- HANDLES COMMANDS WITH PREFIX AFTER THIS POINT -------------
-	if (!message.content.startsWith(prefix)) return;
-
-	// holds any arguments e.g. !ping all; where all is an arg
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const commandName = args.shift().toLowerCase();
-
-	// if a command given by user is not in our commands folder then return
-	if (!bot.commands.has(commandName)) return;
-
-	const command = bot.commands.get(commandName);
-	try {
-		// executes the execute() function of the command
-		command.execute(message, args);
+	else {
+		bot.on(event.name, (...args) => event.execute(...args, bot));
 	}
-	catch (error) {
-		console.error(error);
-		message.reply('There was an error trying to execute that command!');
-	}
-});
+}
 
 // Log our bot in using the token from https://discord.com/developers/applications
 bot.login(process.env.DISCORD_TOKEN);

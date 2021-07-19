@@ -11,8 +11,9 @@
     "eslint": "^7.31.0"
   },
   "scripts": {
-    "test": "node test.js",
-    "start": "node bot.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node .",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -20,8 +21,6 @@
   },
   "keywords": [
     "discord",
-    "discord",
-    "bot",
     "bot",
     "discordjs",
     "js",
