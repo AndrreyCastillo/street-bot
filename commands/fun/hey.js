@@ -3,6 +3,6 @@ module.exports = {
 	description: 'Sreet Hey!',
 	guildOnly: false,
 	execute(message, args) {
-		message.channel.send({ files:['./media/street_hey.jpg'] });
+		message.channel.send({ files:['./media/street_hey.png'] });
 	},
 };
