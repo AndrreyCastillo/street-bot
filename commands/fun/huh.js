@@ -2,6 +2,7 @@
 module.exports = {
 	name: 'huh',
 	description: 'Picture of StreetRat',
+	usage: '',
 	guildOnly: false,
 	execute(message, args) {
 

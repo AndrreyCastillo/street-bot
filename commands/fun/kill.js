@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 module.exports = {
 	name: 'kill',
-	description: 'Moves a random person from any voice channel to the dead channel',
+	description: 'Moves a random person from any voice channel to the afk channel',
+	usage: '',
 	guildOnly: true,
 	execute(message, args) {
 		// if command is executed in a dm

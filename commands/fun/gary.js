@@ -5,6 +5,7 @@ const randomNumber = require('random-number-csprng');
 module.exports = {
 	name: 'gary',
 	description: 'Random gary pictures',
+	usage: '',
 	guildOnly: false,
 	execute(message, args) {
 		const garyFolder = fs.readdirSync('./media/gary');
