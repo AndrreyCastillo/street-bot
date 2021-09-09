@@ -26,7 +26,7 @@ module.exports = {
 
 		const deadChannelID = server.afkChannelID;
 
-		if (deadChannelID === '' || deadChannelID.length === 0) {
+		if (deadChannelID === null) {
 			message.reply('There\'s no afk channel!!!');
 			return;
 		}
