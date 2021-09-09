@@ -4,8 +4,10 @@
   "description": "a discord bot for the Street Cord",
   "main": "bot.js",
   "dependencies": {
+    "bluebird": "^3.7.2",
     "discord.js": "^12.5.3",
-    "dotenv": "^10.0.0"
+    "dotenv": "^10.0.0",
+    "random-number-csprng": "^1.0.2"
   },
   "devDependencies": {
     "eslint": "^7.31.0"
