@@ -5,7 +5,6 @@ module.exports = {
 	usage: '',
 	guildOnly: false,
 	execute(message, args) {
-
 		message.channel.send({ files:['./media/street_huh.jpg'] });
 	},
 };

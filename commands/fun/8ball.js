@@ -10,11 +10,12 @@ module.exports = {
 	guildOnly: false,
 	execute(message, args) {
 		if (args.length === 0) return;
-
 		Promise.try(() => {
 			return randomNumber(0, eightball_answers.length);
 		}).then((number) => {
-			message.reply(eightball_answers[number]);
+			const answer = eightball_answers[number];
+			if (answer === undefined) return;
+			message.reply(answer);
 		});
 	},
 };
