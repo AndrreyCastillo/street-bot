@@ -24,12 +24,13 @@ module.exports = {
 		const userFetched = await message.guild.members.fetch(memberId);
 
 		const memberJoinedAt = formatDate(message, userFetched.joinedAt);
-		const memberNickname = userFetched.nickname;
+		let memberNickname = userFetched.nickname;
+		if (memberNickname === null) memberNickname = 'None';
 
 		const memberRoles = [];
 		(userFetched._roles).forEach(role => memberRoles.push('<@&' + role + '>'));
 		const memberRolesAmount = memberRoles.length;
-		if (memberRolesAmount === 0) memberRoles.push('none');
+		if (memberRolesAmount === 0) memberRoles.push('None');
 
 		const embed = {
 			color: 0xFF0000,
