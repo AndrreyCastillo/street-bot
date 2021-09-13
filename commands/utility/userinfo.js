@@ -89,7 +89,7 @@ function ageCalculator(date) {
 
 	let days = 0;
 	if (years < 1 && months < 1) {
-		days = (now.getTime() - date.geTime() / (1000 * 3600 * 24));
+		days = (now.getTime() - date.getTime() / (1000 * 3600 * 24));
 	}
 
 	let age = '(';
