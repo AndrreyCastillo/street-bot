@@ -54,11 +54,11 @@ module.exports = {
 				},
 				{
 					name: 'Created Date',
-					value: memberAge + ' ' + ageCalculator(member.createdAt),
+					value: memberAge,
 				},
 				{
 					name: 'Joined Date',
-					value: memberJoinedAt + ' ' + ageCalculator(userFetched.joinedAt),
+					value: memberJoinedAt,
 				},
 				{
 					name: 'Roles [' + memberRolesAmount + ']',
@@ -89,7 +89,7 @@ function ageCalculator(date) {
 
 	let days = 0;
 	if (years < 1 && months < 1) {
-		days = (now.getTime() - date.getTime() / (1000 * 3600 * 24));
+		days = (now.getTime() - date.getTime() / (1000 * 60 * 24 * 24));
 	}
 
 	let age = '(';
