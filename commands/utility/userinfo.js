@@ -28,7 +28,8 @@ module.exports = {
 
 		const memberRoles = [];
 		(userFetched._roles).forEach(role => memberRoles.push('<@&' + role + '>'));
-		if (memberRoles.length === 0) memberRoles.push('none');
+		const memberRolesAmount = memberRoles.length;
+		if (memberRolesAmount === 0) memberRoles.push('none');
 
 		const embed = {
 			color: 0xFF0000,
@@ -59,7 +60,7 @@ module.exports = {
 					value: memberJoinedAt + ' ' + ageCalculator(userFetched.joinedAt),
 				},
 				{
-					name: 'Roles [' + memberRoles.length + ']',
+					name: 'Roles [' + memberRolesAmount + ']',
 					value: memberRoles,
 					inline: true,
 				},
