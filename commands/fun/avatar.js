@@ -14,7 +14,7 @@ module.exports = {
 		}
 		const member = members.first();
 
-		const memberAvatar = member.displayAvatarURL({ size: 2048 });
+		const memberAvatar = member.displayAvatarURL({ size: 2048, dynamic: true });
 
 		message.channel.send({ files: [memberAvatar] });
 	},
