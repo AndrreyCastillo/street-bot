@@ -28,6 +28,7 @@ module.exports = {
 
 		const memberRoles = [];
 		(userFetched._roles).forEach(role => memberRoles.push('<@&' + role + '>'));
+		if (memberRoles.length === 0) memberRoles.push('none');
 
 		const embed = {
 			color: 0xFF0000,
@@ -82,7 +83,7 @@ function ageCalculator(date) {
 
 	const years = now.getFullYear() - date.getFullYear();
 
-	const months = years + (now.getMonth() - date.getMonth());
+	const months = (now.getMonth() - date.getMonth()) / 12;
 
 	let days = 0;
 	if (years === 0 && months === 0) {
