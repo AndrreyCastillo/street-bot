@@ -11,9 +11,9 @@ module.exports = {
 		if (message.content.includes('@here') || message.content.includes('@everyone')) return false;
 
 		// When the bot is @'ed
-		if (message.mentions.has(bot.user.id)) {
-			message.reply({ files:['./media/street_hey.png'] });
-		}
+		// if (message.mentions.has(bot.user.id)) {
+		// 	message.reply({ files:['./media/street_hey.png'] });
+		// }
 
 		// ----------- HANDLES COMMANDS WITH PREFIX AFTER THIS POINT -------------
 		if (!message.content.startsWith(prefix)) return;
