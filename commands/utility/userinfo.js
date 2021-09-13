@@ -7,6 +7,8 @@ module.exports = {
 	usage: '@<Username>',
 	guildOnly: true,
 	async execute(message, args) {
+		if (this.guildOnly && message.channel.type === 'dm') return;
+
 		const members = message.mentions.users;
 		if (members.size !== 1) {
 			message.reply('Usage: `' + prefix + this.name + ' ' + this.usage + '`');
