@@ -87,7 +87,7 @@ function ageCalculator(date) {
 	const months = (now.getMonth() - date.getMonth()) / 12;
 
 	let days = 0;
-	if (years === 0 && months === 0) {
+	if (years < 1 && months < 1) {
 		days = (now.getTime() - date.geTime() / (1000 * 3600 * 24));
 	}
 
@@ -100,7 +100,7 @@ function ageCalculator(date) {
 			age += years + ' years';
 		}
 	}
-	if (months !== 0) {
+	if (months >= 1) {
 		if (months === 1) {
 			age += ' ' + months + ' month';
 		}
