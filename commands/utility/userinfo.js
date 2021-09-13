@@ -18,7 +18,7 @@ module.exports = {
 		const memberId = member.id;
 		const memberUsername = member.username;
 		const memberDiscriminator = member.discriminator;
-		const memberAvatar = member.displayAvatarURL();
+		const memberAvatar = member.displayAvatarURL({ dynamic: true });
 		const memberAge = formatDate(message, member.createdAt);
 
 		const userFetched = await message.guild.members.fetch(memberId);
