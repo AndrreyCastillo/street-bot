@@ -13,7 +13,9 @@ module.exports = {
 			message.reply('Usage: `' + prefix + this.name + ' ' + this.usage + '`');
 			return;
 		}
-		const CITY = args;
+		let CITY = '';
+		args.forEach(word => { CITY += word + ' ';});
+
 		const URL = `https://api.openweathermap.org/data/2.5/weather?q=${CITY}&appid=${process.env.WEATHER_API_TOKEN}&units=imperial`;
 
 		axios.get(`${URL}`).then(response => {
