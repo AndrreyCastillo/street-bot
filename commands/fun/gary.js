@@ -15,9 +15,10 @@ module.exports = {
 			garyPictures.push(garyPicture);
 		}
 		Promise.try(() => {
-			return randomNumber(0, garyPictures.length);
+			return randomNumber(0, garyPictures.length - 1);
 		}).then((number) => {
 			const randomPicture = garyPictures[number];
+			// this if statement should never true after this fix??
 			if (randomPicture === undefined) {
 				message.reply({ content: 'You broke the bot momentarily... take this...', files: ['./media/PantsGrab.png'] });
 				return;
