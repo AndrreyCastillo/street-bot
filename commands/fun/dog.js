@@ -4,8 +4,8 @@ const axios = require('axios');
 const env = require('dotenv').config();
 
 module.exports = {
-	name: 'cat',
-	description: 'Shows a random cat',
+	name: 'dog',
+	description: 'Shows a random dog',
 	usage: '',
 	guildOnly: false,
 	execute(message, args) {
