@@ -25,7 +25,10 @@ module.exports = {
 		// if a command given by user is not in our commands folder then return
 		if (!bot.commands.has(commandName)) return;
 
-		const command = bot.commands.get(commandName);
+		const command = bot.commands.get(commandName) || bot.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+
+		if (!command) return;
+
 		try {
 		// executes the execute() function of the command
 			command.execute(message, args);
