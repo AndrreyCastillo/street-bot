@@ -5,7 +5,7 @@ const env = require('dotenv').config();
 
 module.exports = {
 	name: 'dog',
-	alias: ['bark'],
+	aliases: ['bark'],
 	description: 'Shows a random dog',
 	usage: '',
 	guildOnly: false,
