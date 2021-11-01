@@ -22,11 +22,9 @@ module.exports = {
 		const args = message.content.slice(prefix.length).trim().split(/ +/);
 		const commandName = args.shift().toLowerCase();
 
-		// if a command given by user is not in our commands folder then return
-		if (!bot.commands.has(commandName)) return;
-
 		const command = bot.commands.get(commandName) || bot.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
+		// if a command given by user is not in our commands folder or in the aliases section then return
 		if (!command) return;
 
 		try {
