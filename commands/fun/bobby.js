@@ -6,7 +6,7 @@ const bobbyFolder = fs.readdirSync('./media/bobby');
 
 module.exports = {
 	name: 'bobby',
-	aliases: ['booby', 'brabb',],
+	aliases: ['booby', 'brabb'],
 	description: 'Random bobby pictures',
 	usage: '',
 	guildOnly: false,
@@ -15,9 +15,15 @@ module.exports = {
 		for (const bobbyPicture of bobbyFolder) {
 			bobbyPictures.push(bobbyPicture);
 		}
-
-		Promise.try(() => {return randomNumber(0, bobbyPictures.length - 1);}).then((number) => {
-			const randomPicture = bobbyPictures[number];}
+		Promise.try(() => {
+			return randomNumber(0, bobbyPictures.length - 1);
+		}).then((number) => {
+			const randomPicture = bobbyPictures[number];
+			// this if statement should never true after this fix??
+			if (randomPicture === undefined) {
+				message.reply({ content: 'You broke the bot momentarily... take this...', files: ['./media/PantsGrab.png'] });
+				return;
+			}
 			message.reply({ files: ['./media/bobby/' + randomPicture] });
 		});
 	},
