@@ -20,17 +20,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AndrreyCastillo/street-bot.git"
+    "url": "https://github.com/rxxsta/street-bot.git"
   },
   "keywords": [
+    "discordbot",
     "discord",
-    "bot",
     "discordjs",
-    "js",
-    "Street",
-    "Cord"
+    "street-bot"
   ],
-  "author": "Roosta",
+  "author": "roosta",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/rxxsta/street-bot/issues"
