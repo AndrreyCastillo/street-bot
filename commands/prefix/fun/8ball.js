@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 const Promise = require('bluebird');
 const randomNumber = require('random-number-csprng');
-const { eightball_answers } = require('./../../config.json');
+const { eightball_answers } = require('./../../../config.json');
 
 module.exports = {
 	name: '8ball',
@@ -15,7 +15,7 @@ module.exports = {
 		}).then((number) => {
 			const answer = eightball_answers[number];
 			if (answer === undefined) return;
-			message.reply(answer);
+			message.reply({ content: answer });
 		});
 	},
 };

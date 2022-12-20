@@ -1,21 +1,15 @@
 /* eslint-disable no-unused-vars */
-const { prefix } = require('./../../config.json');
 const axios = require('axios');
 const env = require('dotenv').config();
 
 module.exports = {
-	name: 'cat',
-	aliases: ['meow', 'pussy'],
-	description: 'Shows a random cat',
+	name: 'dog',
+	aliases: ['bark'],
+	description: 'Shows a random dog',
 	usage: '',
 	guildOnly: false,
 	execute(message, args) {
-		// if (args.length < 1) {
-		// 	message.reply('Usage: `' + prefix + this.name + ' ' + this.usage + '`');
-		// 	return;
-		// }
-
-		const URL = 'https://api.thecatapi.com/v1/images/search';
+		const URL = 'https://api.thedogapi.com/v1/images/search';
 
 		axios.get(`${URL}`).then(response => {
 
@@ -24,7 +18,7 @@ module.exports = {
 
 			message.reply({ files: [url] });
 		}).catch((error) => {
-			message.reply('You broke it...');
+			message.reply({ content: 'You broke it...' });
 			console.log(error);
 		});
 	},

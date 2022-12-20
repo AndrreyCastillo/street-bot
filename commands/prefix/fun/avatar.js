@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-const { prefix } = require('./../../config.json');
+const { prefix } = require('./../../../config.json');
 
 module.exports = {
 	name: 'avatar',
@@ -9,7 +9,7 @@ module.exports = {
 	async execute(message, args) {
 		const members = message.mentions.users;
 		if (members.size !== 1) {
-			message.reply('Usage: `' + prefix + this.name + ' ' + this.usage + '`');
+			message.reply({ content: 'Usage: `' + prefix + this.name + ' ' + this.usage + '`' });
 			return;
 		}
 		const member = members.first();

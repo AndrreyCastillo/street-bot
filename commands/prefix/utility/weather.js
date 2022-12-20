@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-const { prefix } = require('./../../config.json');
+const { prefix } = require('./../../../config.json');
 const axios = require('axios');
 const env = require('dotenv').config();
 
@@ -10,7 +10,7 @@ module.exports = {
 	guildOnly: false,
 	execute(message, args) {
 		if (args.length < 1) {
-			message.reply('Usage: `' + prefix + this.name + ' ' + this.usage + '`');
+			message.reply({ content: 'Usage: `' + prefix + this.name + ' ' + this.usage + '`' });
 			return;
 		}
 		let CITY = '';
@@ -92,9 +92,9 @@ module.exports = {
 					},
 				],
 			};
-			message.channel.send({ embed: embed });
+			message.channel.send({ embeds: [embed] });
 		}).catch((error) => {
-			message.reply('Enter a valid city name');
+			message.reply({ content: 'Enter a valid city name' });
 			console.log(error);
 		});
 	},
