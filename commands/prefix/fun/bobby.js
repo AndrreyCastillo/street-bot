@@ -6,7 +6,7 @@ const bobbyFolder = fs.readdirSync('./media/bobby');
 
 module.exports = {
 	name: 'bobby',
-	aliases: ['booby', 'brabb'],
+	aliases: ['booby', 'brabb', 'bobbert', 'boobshwee', 'bob', 'robert', 'bobillamus'],
 	description: 'Random bobby pictures',
 	usage: '',
 	guildOnly: false,

@@ -5,6 +5,6 @@ module.exports = {
 	usage: '',
 	guildOnly: false,
 	execute(message, args) {
-		message.channel.send('?alive');
+		message.channel.send({ content: '?alive' });
 	},
 };

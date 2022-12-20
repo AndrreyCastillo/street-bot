@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
-const { prefix } = require('./../../config.json');
+const { prefix } = require('./../../../config.json');
+const { ChannelType } = require('discord.js');
 
 module.exports = {
 	name: 'userinfo',
@@ -7,14 +8,16 @@ module.exports = {
 	usage: '@<Username>',
 	guildOnly: true,
 	async execute(message, args) {
-		if (this.guildOnly && message.channel.type === 'dm') return;
+		if (this.guildOnly && message.channel.type === ChannelType.DM) return;
 
 		const members = message.mentions.users;
 		if (members.size !== 1) {
-			message.reply('Usage: `' + prefix + this.name + ' ' + this.usage + '`');
+			message.reply({ content: 'Usage: `' + prefix + this.name + ' ' + this.usage + '`' });
 			return;
 		}
+		// get the mentioned user
 		const member = members.first();
+		// if the mention user is the bot, return
 		if (member.bot) return;
 
 		const memberId = member.id;
@@ -29,10 +32,9 @@ module.exports = {
 		let memberNickname = userFetched.nickname;
 		if (memberNickname === null) memberNickname = 'None';
 
-		const memberRoles = [];
-		(userFetched._roles).forEach(role => memberRoles.push('<@&' + role + '>'));
-		const memberRolesAmount = memberRoles.length;
-		if (memberRolesAmount === 0) memberRoles.push('None');
+		const memberRoles = userFetched.roles.cache.map(role => role).join(' ');
+		const memberRolesCount = memberRoles.split(' ').length;
+		if (memberRolesCount === 0) memberRoles.push('None');
 
 		const embed = {
 			color: 0xFF0000,
@@ -45,7 +47,7 @@ module.exports = {
 			},
 			fields: [
 				{
-					name: 'ID',
+					name: 'Id',
 					value: memberId,
 					inline: true,
 				},
@@ -63,14 +65,14 @@ module.exports = {
 					value: memberJoinedAt,
 				},
 				{
-					name: 'Roles [' + memberRolesAmount + ']',
+					name: 'Roles [' + memberRolesCount + ']',
 					value: memberRoles,
 					inline: true,
 				},
 			],
 		};
 
-		message.channel.send({ embed: embed });
+		message.channel.send({ embeds: [embed] });
 	},
 };
 
@@ -80,47 +82,4 @@ function formatDate(message, date) {
 	const fDate = date.toLocaleDateString(locale, options);
 
 	return fDate;
-}
-
-function ageCalculator(date) {
-	const now = new Date();
-
-	const years = now.getFullYear() - date.getFullYear();
-
-	const months = (now.getMonth() - date.getMonth()) / 12;
-
-	let days = 0;
-	if (years < 1 && months < 1) {
-		days = (now.getTime() - date.getTime() / (1000 * 60 * 24 * 24));
-	}
-
-	let age = '(';
-	if (years !== 0) {
-		if (years === 1) {
-			age += years + ' year';
-		}
-		else {
-			age += years + ' years';
-		}
-	}
-	if (months >= 1) {
-		if (months === 1) {
-			age += ' ' + months + ' month';
-		}
-		else {
-			age += ' ' + months + ' months';
-		}
-	}
-	if (days !== 0) {
-		if (days === 1) {
-			age += days + ' day';
-		}
-		else {
-			age += days + ' days';
-		}
-	}
-
-	age += ' ago)';
-
-	return age;
 }

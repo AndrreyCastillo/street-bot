@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 const fs = require('fs');
-const { prefix } = require('./../../config.json');
+const path = require('path');
+const { prefix } = require('./../../../config.json');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
 	name: 'help',
@@ -10,15 +12,18 @@ module.exports = {
 	execute(message, args) {
 		const commandHelp = [];
 
-		const commandFolders = fs.readdirSync('./commands');
+		const commandFoldersPath = path.join(__dirname, '../');
+		const commandFolders = fs.readdirSync(commandFoldersPath);
 		for (const folder of commandFolders) {
 
 			// The fs.readdirSync() method will return an array of all the file names in a directory, e.g. ['ping.js', 'beep.js']
 			// .filter() makes sure we only use command files
-			const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
+			const commandFilesPath = path.join(commandFoldersPath, folder);
+			const commandFiles = fs.readdirSync(commandFilesPath).filter(file => file.endsWith('.js'));
 
 			for (const file of commandFiles) {
-				const command = require(`./../../commands/${folder}/${file}`);
+				const commandPath = path.join(commandFilesPath, file);
+				const command = require(commandPath);
 
 				commandHelp.push(command);
 			}
@@ -38,6 +43,6 @@ module.exports = {
 			fields: fields,
 		};
 
-		message.channel.send({ embed: embed });
+		message.channel.send({ embeds: [embed] });
 	},
 };
