@@ -46,6 +46,11 @@ module.exports = {
 			}
 		}
 
+		if (voiceMemberIds.length == 0) {
+			message.reply({ content: 'Every one\'s already dead :(' });
+			return;
+		}
+
 		const randomMemberId = voiceMemberIds[crypto.randomInt(0, voiceMemberIds.length)];
 
 		for (const [channelId, channel] of channels) {
@@ -61,7 +66,5 @@ module.exports = {
 				}
 			}
 		}
-
-		message.reply({ content: 'Every one\'s already dead :(' });
 	},
 };
