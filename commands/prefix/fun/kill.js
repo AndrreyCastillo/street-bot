@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const { ChannelType } = require('discord.js');
 
 /* eslint-disable no-unused-vars */
@@ -45,7 +46,7 @@ module.exports = {
 			}
 		}
 
-		const randomMemberId = voiceMemberIds[Math.floor(Math.random() * voiceMemberIds.length)];
+		const randomMemberId = voiceMemberIds[crypto.randomInt(0, voiceMemberIds.length)];
 
 		for (const [channelId, channel] of channels) {
 			if (channelId === deadChannelId) continue;

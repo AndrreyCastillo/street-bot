@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
-const Promise = require('bluebird');
-const randomNumber = require('random-number-csprng');
+const crypto = require('crypto');
 const { eightball_answers } = require('./../../../config.json');
 
 module.exports = {
@@ -10,12 +9,10 @@ module.exports = {
 	guildOnly: false,
 	execute(message, args) {
 		if (args.length === 0) return;
-		Promise.try(() => {
-			return randomNumber(0, eightball_answers.length);
-		}).then((number) => {
-			const answer = eightball_answers[number];
-			if (answer === undefined) return;
-			message.reply({ content: answer });
-		});
+
+		const number = crypto.randomInt(0, eightball_answers.length);
+		const answer = eightball_answers[number];
+
+		message.reply({ content: answer });
 	},
 };

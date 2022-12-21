@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 const fs = require('fs');
-const Promise = require('bluebird');
+const crypto = require('crypto');
 const randomNumber = require('random-number-csprng');
 const garyFolder = fs.readdirSync('./media/gary');
 
@@ -14,16 +14,10 @@ module.exports = {
 		for (const garyPicture of garyFolder) {
 			garyPictures.push(garyPicture);
 		}
-		Promise.try(() => {
-			return randomNumber(0, garyPictures.length - 1);
-		}).then((number) => {
-			const randomPicture = garyPictures[number];
-			// this if statement should never true after this fix??
-			if (randomPicture === undefined) {
-				message.reply({ content: 'You broke the bot momentarily... take this...', files: ['./media/PantsGrab.png'] });
-				return;
-			}
-			message.reply({ files: ['./media/gary/' + randomPicture] });
-		});
+		const number = crypto.randomInt(0, garyPictures.length);
+
+		const randomPicture = garyPictures[number];
+
+		message.reply({ files: ['./media/gary/' + randomPicture] });
 	},
 };
