@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 const fs = require('fs');
 const crypto = require('crypto');
-const randomNumber = require('random-number-csprng');
 const garyFolder = fs.readdirSync('./media/gary');
 
 module.exports = {
