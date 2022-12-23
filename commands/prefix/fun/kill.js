@@ -9,7 +9,7 @@ module.exports = {
 	guildOnly: true,
 	execute(message, args) {
 		// if command is executed in a DM
-		if (this.guildOnly && message.channel.type === ChannelType.DM) return message.reply('Nice try');
+		if (this.guildOnly && message.channel.type === ChannelType.DM) return;
 
 		// Gets guild from the Message object
 		const server = message.guild;
@@ -29,42 +29,27 @@ module.exports = {
 		}
 
 		const deadChannelId = server.afkChannelId;
-
 		if (deadChannelId === null) {
 			message.reply({ content: 'There\'s no afk channel!!!' });
 			return;
 		}
 
-		const voiceMemberIds = [];
-		const channels = server.channels.cache.filter(channel => channel.type === ChannelType.GuildVoice);
+		const voiceMembers = message.guild.members.cache.filter(member => member.voice.channel);
 
-		for (const [channelId, channel] of channels) {
-			if (channelId === deadChannelId) continue;
-
-			for (const [memberId, member] of channel.members) {
-				voiceMemberIds.push(memberId);
-			}
-		}
-
-		if (voiceMemberIds.length == 0) {
+		if (voiceMembers.size == 0) {
 			message.reply({ content: 'Every one\'s already dead :(' });
 			return;
 		}
 
-		const randomMemberId = voiceMemberIds[crypto.randomInt(0, voiceMemberIds.length)];
-
-		for (const [channelId, channel] of channels) {
-			if (channelId === deadChannelId) continue;
-
-			for (const [memberId, member] of channel.members) {
-				if (randomMemberId === memberId) {
-					member.voice.setChannel(deadChannelId)
-						.then(message.channel.send({ content: `See ya, ${member}` }))
-						.catch(console.error);
-
-					return;
-				}
-			}
+		const members = [];
+		for (const [memberId, member] of voiceMembers) {
+			if (member.voice.channel.id === deadChannelId) continue;
+			members.push(member);
 		}
+
+		const randomMember = members[crypto.randomInt(0, members.length)];
+		randomMember.voice.setChannel(deadChannelId)
+			.then(message.channel.send({ content: `See ya, ${randomMember}` }))
+			.catch(console.error);
 	},
 };
