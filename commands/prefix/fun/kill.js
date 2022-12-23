@@ -34,20 +34,14 @@ module.exports = {
 			return;
 		}
 
-		const voiceMembers = message.guild.members.cache.filter(member => member.voice.channel);
+		const voiceMembers = message.guild.members.cache.filter(member => member.voice.channel && member.voice.channel.id !== deadChannelId);
 
 		if (voiceMembers.size == 0) {
 			message.reply({ content: 'Every one\'s already dead :(' });
 			return;
 		}
 
-		const members = [];
-		for (const [memberId, member] of voiceMembers) {
-			if (member.voice.channel.id === deadChannelId) continue;
-			members.push(member);
-		}
-
-		const randomMember = members[crypto.randomInt(0, members.length)];
+		const randomMember = voiceMembers[crypto.randomInt(0, voiceMembers.length)];
 		randomMember.voice.setChannel(deadChannelId)
 			.then(message.channel.send({ content: `See ya, ${randomMember}` }))
 			.catch(console.error);
