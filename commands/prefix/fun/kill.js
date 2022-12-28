@@ -34,7 +34,7 @@ module.exports = {
 			return;
 		}
 
-		const voiceMembers = message.guild.members.cache.filter(member => member.voice.channel && member.voice.channel.id !== deadChannelId);
+		const voiceMembers = server.members.cache.filter(member => member.voice.channel && member.voice.channel.id !== deadChannelId);
 
 		if (voiceMembers.size == 0) {
 			message.reply({ content: 'Every one\'s already dead :(' });
