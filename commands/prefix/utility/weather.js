@@ -6,17 +6,20 @@ const env = require('dotenv').config();
 module.exports = {
 	name: 'weather',
 	description: 'Shows the weather of a provided city',
-	usage: '<City>',
+	usage: '<City> <State Code> <Country Code>',
 	guildOnly: false,
 	execute(message, args) {
 		if (args.length < 1) {
 			message.reply({ content: 'Usage: `' + prefix + this.name + ' ' + this.usage + '`' });
 			return;
 		}
-		let CITY = '';
-		args.forEach(word => { CITY += word + ' ';});
+		const CITY = args.slice(0, -2).join(' ');
+		const STATE = args.slice(-2, -1);
+		const COUNTRY = args.slice(-1);
 
-		const URL = `https://api.openweathermap.org/data/2.5/weather?q=${CITY}&appid=${process.env.WEATHER_API_TOKEN}&units=imperial`;
+		const QUERY = [CITY, STATE, COUNTRY].filter(x => x.length > 0).join(',');
+
+		const URL = `https://api.openweathermap.org/data/2.5/weather?q=${QUERY}&appid=${process.env.WEATHER_API_TOKEN}&units=imperial`;
 
 		axios.get(`${URL}`).then(response => {
 			// const author = message.author.username;
@@ -92,9 +95,9 @@ module.exports = {
 					},
 				],
 			};
-			message.channel.send({ embeds: [embed] });
+			message.reply({ embeds: [embed] });
 		}).catch((error) => {
-			message.reply({ content: 'Enter a valid city name' });
+			message.reply({ content: 'Enter a valid query' });
 			console.log(error);
 		});
 	},
