@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 const crypto = require('crypto');
-const { prefix } = require('./../../../config.json');
-const { eightball_answers } = require('./../../../config.json');
+const { prefix, eightball_answers } = require('./../../../config.json');
 
 module.exports = {
 	name: '8ball',
