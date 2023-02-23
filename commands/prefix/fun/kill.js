@@ -41,7 +41,9 @@ module.exports = {
 			return;
 		}
 
-		const randomMember = voiceMembers[crypto.randomInt(0, voiceMembers.length)];
+		const arrayMemberIds = Array.from(voiceMembers.keys());
+		const randomMemberId = arrayMemberIds[crypto.randomInt(0, arrayMemberIds.length)];
+		const randomMember = voiceMembers.get(randomMemberId);
 		randomMember.voice.setChannel(deadChannelId)
 			.then(message.channel.send({ content: `See ya, ${randomMember}` }))
 			.catch(console.error);
