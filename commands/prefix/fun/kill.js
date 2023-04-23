@@ -24,8 +24,13 @@ module.exports = {
 
 		// only server owner can run this command
 		if (sender != owner) {
-			message.reply({ content: 'Nice try' });
-			return;
+			const roll = 100;
+			const memberRoll = crypto.randomInt(1, roll + 1);
+
+			if (memberRoll != roll) {
+				message.reply({ content: `Nice try, roll a natural ${roll}. You rolled a ${memberRoll}` });
+				return;
+			}
 		}
 
 		const deadChannelId = server.afkChannelId;
