@@ -24,7 +24,7 @@ module.exports = {
 
 		// only server owner can run this command
 		if (sender != owner) {
-			const roll = 100;
+			const roll = 69;
 			const memberRoll = crypto.randomInt(1, roll + 1);
 
 			if (memberRoll != roll) {
