@@ -50,7 +50,7 @@ module.exports = {
 		const randomMemberId = arrayMemberIds[crypto.randomInt(0, arrayMemberIds.length)];
 		const randomMember = voiceMembers.get(randomMemberId);
 		randomMember.voice.setChannel(deadChannelId)
-			.then(message.channel.send({ content: `See ya, ${randomMember}` }))
+			.then(message.reply({ content: `See ya, ${randomMember}` }))
 			.catch(console.error);
 	},
 };
